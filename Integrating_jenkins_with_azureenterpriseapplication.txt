@@ -1,0 +1,33 @@
+
+On Azure
+---------------------------------------------------------------------------------------------------------------------------
+Go to Azure-->Microsoft_Entraid
+select&click Create NewEnterprise application
+click&select Create your own application
+select&click Integrate any other application you don't find in the gallery (Non-gallery)
+select&click setup single sign on
+click        SAML
+click        edit Basic SAML Configuration
+click        Add identifier in Identifier (Entity ID) section
+paste        https://<ipaddr>/securityRealm/finishLogin in Identifier (Entity ID)
+click        Add reply URL in Reply URL (Assertion Consumer Service URL)
+paste        https://<ipaddr>/securityRealm/finishLogin in Reply URL
+click        Sign on URL(Text Box)
+paste        https://<ipaddr>/
+download     Federation Metadata XML
+
+on jenkins
+-----------------------------------------------------------------------------------------------------------------------------
+download & Install    SAML 2.0 plugin
+Restart               jenkins
+click                 manage jenkins --> security
+Select                in securityRealm SAML 2.0
+Fill in              - Raw Xml IdP Metadata with  Federation Metadata XML (downloaded from azure)
+                     - copy from Display Name Attribute textbox and paste it in Username Attribute aand
+                     - copy from Display Name Attribute textbox and paste it in email attribute replace */claims/name with */claims/emailaddress 
+                     - paste http://schemas.xmlsoap.org/claims/Group in Groups attribute
+# open jenkins in inprivate window u will be asked for microsoft Login
+
+
+
+
