@@ -13,8 +13,11 @@ pipeline{
   stages{    
     stage('git') {
       steps{
+        dir('nopcommerce') {     
         git url: 'https://github.com/Akhil-Tejas225/nopCommerce.git',
-        branch: 'develop' 
+        branch: 'develop'
+        }
+        
     }
       }
         
@@ -34,18 +37,23 @@ pipeline{
         dotnetsdk 'DOTNET_HOME'
     }
       steps{
-        script {
+        dir ('nopcommerce'){    
+           script {
            def projectpath = sh(script: "find . -name Nop.Web.csproj", returnStdout: true).trim()    // script{} is of groovy style adopted by me (akhil) to ensure avoid giving complete path of the csproj file
            dotnetPublish configuration: 'Release', outputDirectory: 'published', project: "$projectpath" 
-          
-        }  
+           } 
+         }
+   
     } 
       post{
         success{
-          zip zipFile: 'published.zip', 
+          dir(''nopcommerce'') {  
+            zip zipFile: 'published.zip', 
             archive: true, 
             dir: './published', 
             overwrite: true
+            }
+        
         }
       }
 }  
