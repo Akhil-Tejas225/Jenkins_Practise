@@ -26,8 +26,13 @@ Fill in              - Raw Xml IdP Metadata with  Federation Metadata XML (downl
                      - copy from Display Name Attribute textbox and paste it in Username Attribute aand
                      - copy from Display Name Attribute textbox and paste it in email attribute replace */claims/name with */claims/emailaddress 
                      - paste http://schemas.xmlsoap.org/claims/Group in Groups attribute
+
 # open jenkins in inprivate window u will be asked for microsoft Login
 
+add users to Azure AD and add this users the Group
+now navigate to Enterprise applications --><click_the_application_of_choice> "click on Set up single sign on"-->add group claim-->
+--->select Groups --->Security groups---->Source attribute---->Group ID and check on Emit group name for cloud-only groups
+once this is configured and saved
 
-
+Go Jenkins---> security-->authorization--->select <Role_based_strategy> and save it---->u will see manage and assign roles-->"User/group to add" box, type the group name exactly as it appears in whoAmI and assign roles like developer,Admin ..etc
 
